@@ -30,12 +30,22 @@ class BoardContainer extends React.Component {
     this.props.deleteBoard(id);
   }
 
+  openBoardDetail(id) {
+    let { history } = this.props;
+    history && history.push("/boards/" + id);
+  }
+
   render() {
+    console.log(this.props);
     let { boards } = this.props;
     let { showAddBoard } = this.state;
     const boardHtml = boards.map((obj, index) => {
       return (
-        <div className={style.boardTile} key={index}>
+        <div
+          className={style.boardTile}
+          key={index}
+          onClick={this.openBoardDetail.bind(this, obj.id)}
+        >
           <Card style={{ width: "18rem" }}>
             <Card.Body>
               <Card.Title>{obj.title}</Card.Title>
@@ -64,7 +74,6 @@ class BoardContainer extends React.Component {
               >
                 <Card.Body>
                   <Card.Title>Add Board</Card.Title>
-                  <Card.Link>Card Link</Card.Link>
                 </Card.Body>
               </Card>
             </div>

@@ -2,7 +2,8 @@ export const addBoard = boardData => {
   let dateStr = new Date();
   let id = dateStr.getTime();
   let date = dateStr.toDateString();
-  let data = { [id]: Object.assign({}, boardData, { id, date }) };
+  let listIds = [];
+  let data = { [id]: Object.assign({}, boardData, { id, date, listIds }) };
   return {
     type: "ADD_BOARD_SUCCESS",
     data

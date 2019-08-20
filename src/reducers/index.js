@@ -14,7 +14,7 @@ let initialBoard = {
     id: "123",
     title: "The Rise of USA",
     desc: "Involves the rise of United States",
-    lists: []
+    listIds: []
   }
 };
 
