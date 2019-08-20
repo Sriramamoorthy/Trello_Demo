@@ -3,7 +3,6 @@ export const addBoard = boardData => {
   let id = dateStr.getTime();
   let date = dateStr.toDateString();
   let data = { [id]: Object.assign({}, boardData, { id, date }) };
-  console.log("sent data", data);
   return {
     type: "ADD_BOARD_SUCCESS",
     data

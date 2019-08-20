@@ -24,8 +24,9 @@ export const boards = (state = initialBoard, { type, data }) => {
       return Object.assign({}, state, data);
     }
     case "DELETE_BOARD_SUCCESS": {
-      delete state[data];
-      return state;
+      let newState = Object.assign({}, state);
+      delete newState[data];
+      return newState;
     }
     default:
       return state;
