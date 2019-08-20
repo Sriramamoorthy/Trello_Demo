@@ -1,0 +1,11 @@
+.boardContainer {
+  margin: 50px 20px 20px 20px;
+}
+.boardTile {
+  display: inline-block;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.addBoard {
+  background: #efefef;
+}
