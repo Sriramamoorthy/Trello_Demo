@@ -3,9 +3,19 @@
 }
 .boardTile {
   display: inline-block;
-  margin-right: 10px;
+  margin: 10px;
   cursor: pointer;
 }
 .addBoard {
+  background: #efefef;
+}
+.deleteButton {
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 2px 4px 2px 4px;
+  border-radius: 3px;
+}
+.deleteButton:hover {
   background: #efefef;
 }

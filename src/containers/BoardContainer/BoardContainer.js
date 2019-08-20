@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { getBoards } from "../../selectors/index";
 import style from "./BoardContainer.module.css";
 import AddModal from "../../components/AddModal/AddModal";
+import { addBoard, deleteBoard } from "../../actions";
 class BoardContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -12,15 +13,23 @@ class BoardContainer extends React.Component {
       showAddBoard: false
     };
     this.toggleAddModal = this.toggleAddModal.bind(this);
+    this.handleAddBoard = this.handleAddBoard.bind(this);
   }
 
-  handleAddBoard() {}
+  handleAddBoard(obj) {
+    this.props.addBoard(obj);
+  }
 
   toggleAddModal() {
     this.setState({
       showAddBoard: !this.state.showAddBoard
     });
   }
+
+  deleteBoard(id) {
+    this.props.deleteBoard(id);
+  }
+
   render() {
     let { boards } = this.props;
     let { showAddBoard } = this.state;
@@ -29,10 +38,16 @@ class BoardContainer extends React.Component {
         <div className={style.boardTile} key={index}>
           <Card style={{ width: "18rem" }}>
             <Card.Body>
-              <Card.Title>{obj.name}</Card.Title>
+              <Card.Title>{obj.title}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
                 {obj.desc}
               </Card.Subtitle>
+              <span
+                className={style.deleteButton}
+                onClick={this.deleteBoard.bind(this, obj.id)}
+              >
+                Delete
+              </span>
             </Card.Body>
           </Card>
         </div>
@@ -49,13 +64,15 @@ class BoardContainer extends React.Component {
               >
                 <Card.Body>
                   <Card.Title>Add Board</Card.Title>
+                  <Card.Link>Card Link</Card.Link>
                 </Card.Body>
               </Card>
             </div>
             <AddModal
               isShow={showAddBoard}
-              title="Add Board"
+              boardTitle="Add Board"
               hideModal={this.toggleAddModal}
+              onSubmit={this.handleAddBoard}
             />
           </Row>
         </Container>
@@ -70,4 +87,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(BoardContainer);
+export default connect(
+  mapStateToProps,
+  {
+    addBoard,
+    deleteBoard
+  }
+)(BoardContainer);

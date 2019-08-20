@@ -1,34 +1,91 @@
 import React from "react";
-import { Modal, Form, Button } from "react-bootstrap";
-
+import { Modal, Button } from "react-bootstrap";
+import InputText from "../InputText/InputText";
+import style from "./AddModal.module.css";
 export default class AddModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: "",
+      desc: ""
+    };
+    this.onTypeDesc = this.onTypeDesc.bind(this);
+    this.onTypeTitle = this.onTypeTitle.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+  }
+
+  onTypeTitle(str) {
+    this.setState({
+      title: str
+    });
+  }
+
+  onTypeDesc(str) {
+    this.setState({
+      desc: str
+    });
+  }
+
+  onSubmit() {
+    let { onSubmit } = this.props;
+    let { title, desc } = this.state;
+    onSubmit &&
+      onSubmit({
+        title,
+        desc
+      });
+    this.hideModal();
+  }
+
+  hideModal() {
+    this.setState({
+      title: "",
+      desc: ""
+    });
+    this.props.hideModal();
+  }
+
   render() {
-    let { isShow, hideModal, title } = this.props;
+    let { isShow, boardTitle } = this.props;
+    let { title, desc } = this.state;
     return (
       <Modal
         size="sm"
         show={isShow}
-        onHide={hideModal}
+        onHide={this.hideModal}
         aria-labelledby="example-modal-sizes-title-sm"
       >
         <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-sm">{title}</Modal.Title>
+          <Modal.Title id="example-modal-sizes-title-sm">
+            {boardTitle}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            <Form.Group controlId="formTitle">
-              <Form.Label>Title</Form.Label>
-              <Form.Control type="text" placeholder="Enter Title" />
-            </Form.Group>
-
-            <Form.Group controlId="formDescription">
-              <Form.Label>Description</Form.Label>
-              <Form.Control type="text" placeholder="Enter Description" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Create
+          <div className={style.inputWrapper}>
+            <InputText
+              onKeyup={this.onTypeTitle}
+              placeHolder="Enter Title"
+              value={title}
+            />
+          </div>
+          <div className={style.inputWrapper}>
+            <InputText
+              onKeyup={this.onTypeDesc}
+              placeHolder="Enter Description"
+              value={desc}
+            />
+          </div>
+          <div className={style.submitButton}>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={this.onSubmit}
+              disabled={title === ""}
+            >
+              {boardTitle}
             </Button>
-          </Form>
+          </div>
         </Modal.Body>
       </Modal>
     );

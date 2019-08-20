@@ -12,7 +12,7 @@ export const demo = (state = "", action) => {
 let initialBoard = {
   123: {
     id: "123",
-    name: "The Rise of USA",
+    title: "The Rise of USA",
     desc: "Involves the rise of United States",
     lists: []
   }
@@ -22,6 +22,10 @@ export const boards = (state = initialBoard, { type, data }) => {
   switch (type) {
     case "ADD_BOARD_SUCCESS": {
       return Object.assign({}, state, data);
+    }
+    case "DELETE_BOARD_SUCCESS": {
+      delete state[data];
+      return state;
     }
     default:
       return state;
