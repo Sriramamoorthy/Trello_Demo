@@ -15,7 +15,14 @@
   font-weight: bold;
   padding: 2px 4px 2px 4px;
   border-radius: 3px;
+  cursor: pointer;
 }
 .deleteButton:hover {
   background: #efefef;
+}
+.deleteCont {
+  cursor: default;
+  text-align: right;
+  padding: 5px 10px;
+  border-top: 2px solid #efefef;
 }

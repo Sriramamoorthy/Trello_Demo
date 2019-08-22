@@ -41,24 +41,22 @@ class BoardContainer extends React.Component {
     let { showAddBoard } = this.state;
     const boardHtml = boards.map((obj, index) => {
       return (
-        <div
-          className={style.boardTile}
-          key={index}
-          onClick={this.openBoardDetail.bind(this, obj.id)}
-        >
+        <div className={style.boardTile} key={index}>
           <Card style={{ width: "18rem" }}>
-            <Card.Body>
+            <Card.Body onClick={this.openBoardDetail.bind(this, obj.id)}>
               <Card.Title>{obj.title}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
                 {obj.desc}
               </Card.Subtitle>
+            </Card.Body>
+            <div className={style.deleteCont}>
               <span
                 className={style.deleteButton}
                 onClick={this.deleteBoard.bind(this, obj.id)}
               >
                 Delete
               </span>
-            </Card.Body>
+            </div>
           </Card>
         </div>
       );

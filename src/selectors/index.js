@@ -5,3 +5,8 @@ export let getBoards = ({ boards }) => {
   }
   return boardArray;
 };
+
+export let getBoardName = (state, id) => {
+  console.log(state);
+  return state[id].title || "";
+};
