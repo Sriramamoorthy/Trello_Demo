@@ -14,7 +14,20 @@ let initialBoard = {
     id: "123",
     title: "The Rise of USA",
     desc: "Involves the rise of United States",
-    listIds: []
+    listIds: ["321", "124"]
+  }
+};
+
+let initialCards = {
+  321: {
+    id: "321",
+    title: "To Do List",
+    cardIds: []
+  },
+  124: {
+    id: "124",
+    title: "Doing",
+    cardIds: []
   }
 };
 
@@ -38,16 +51,31 @@ export const boards = (state = initialBoard, { type, data }) => {
   }
 };
 
-export const lists = (state = {}, { type, data }) => {
+export const lists = (state = initialCards, { type, data }) => {
   switch (type) {
-    case "ADD_LIST": {
+    case "ADD_LIST":
       return Object.assign({}, state, data);
+    case "ADD_CARD_TO_LIST": {
+      let newState = Object.assign({}, state);
+      newState[data.listId].cardIds.push(data.cardId);
+      return newState;
     }
     case "DELETE_LIST_SUCCESS": {
       let newState = Object.assign({}, state);
       delete newState[data];
       return newState;
     }
+    default:
+      return state;
+  }
+};
+
+export const cards = (state = {}, { type, data }) => {
+  switch (type) {
+    case "ADD_CARD":
+      return Object.assign({}, state, data);
+    case "DELETE_CARD":
+      return state;
     default:
       return state;
   }

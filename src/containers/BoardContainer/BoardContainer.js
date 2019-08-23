@@ -36,7 +36,6 @@ class BoardContainer extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     let { boards } = this.props;
     let { showAddBoard } = this.state;
     const boardHtml = boards.map((obj, index) => {

@@ -35,9 +35,19 @@ export const addList = (listData, boardId) => {
   };
 };
 
-export const addListToBoard = (boardId, listId) => {
-  return {
-    type: "ADD_LIST_TO_BOARD",
-    data: { boardId, listId }
+export const addCard = (cardData, listId) => {
+  return dispatch => {
+    let dateStr = new Date();
+    let id = dateStr.getTime();
+    let date = dateStr.toDateString();
+    let data = { [id]: Object.assign({}, cardData, { id, date }) };
+    dispatch({
+      type: "ADD_CARD",
+      data
+    });
+    dispatch({
+      type: "ADD_CARD_TO_LIST",
+      data: { listId, cardId: id }
+    });
   };
 };

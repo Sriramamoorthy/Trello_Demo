@@ -1,55 +1,75 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import style from "./AddList.module.css";
+import style from "./AddCard.module.css";
 import InputText from "../InputText/InputText";
-export default class AddList extends React.Component {
+export default class AddCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showAddForm: false,
-      listName: ""
+      cardName: "",
+      cardDesc: ""
     };
     this.toggleForm = this.toggleForm.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
+    this.onChangeDesc = this.onChangeDesc.bind(this);
     this.onAdd = this.onAdd.bind(this);
   }
 
   toggleForm() {
     this.setState({
       showAddForm: !this.state.showAddForm,
-      listName: ""
+      cardName: "",
+      cardDesc: ""
     });
   }
 
-  onChange(str) {
+  onChangeName(str) {
     this.setState({
-      listName: str
+      cardName: str
+    });
+  }
+
+  onChangeDesc(str) {
+    this.setState({
+      cardDesc: str
     });
   }
 
   onAdd() {
-    let { listName } = this.state;
+    let { cardName, cardDesc } = this.state;
     let { onAdd } = this.props;
-    onAdd && onAdd({ title: listName });
+    onAdd && onAdd({ title: cardName, desc: cardDesc });
     this.setState({
-      listName: ""
+      cardName: "",
+      cardDesc: ""
     });
   }
 
   render() {
-    let { showAddForm, listName } = this.state;
+    let { showAddForm, cardName, cardDesc } = this.state;
     return (
       <div className={style.addBtnCont}>
         {!showAddForm ? (
-          <Button variant="secondary" block onClick={this.toggleForm}>
-            Add List
+          <Button
+            variant="secondary"
+            style={{ background: "#efefef", border: "#efefef", color: "#aaa" }}
+            block
+            onClick={this.toggleForm}
+          >
+            Add Card
           </Button>
         ) : (
           <div className={style.addListCont}>
             <InputText
-              placeHolder="Enter List Name"
-              onKeyup={this.onChange}
-              value={listName}
+              placeHolder="Enter Card Name"
+              onKeyup={this.onChangeName}
+              value={cardName}
+            />
+            <InputText
+              placeHolder="Enter Card Description"
+              onKeyup={this.onChangeDesc}
+              value={cardDesc}
             />
             <div className={style.addLst}>
               <Button variant="success" onClick={this.onAdd}>
