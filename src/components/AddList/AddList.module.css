@@ -1,0 +1,16 @@
+.addBtnCont {
+  width: 18rem;
+}
+.addListCont {
+  padding: 2px 2px 2px 2px;
+  border: 2px solid #c3bfbf;
+  border-radius: 4px;
+}
+.addLst {
+  display: inline-block;
+  margin: 5px 2px 2px 2px;
+}
+.cnclLst {
+  display: inline-block;
+  margin: 5px 2px 2px 2px;
+}

@@ -16,3 +16,28 @@ export const deleteBoard = id => {
     data: id
   };
 };
+
+export const addList = (listData, boardId) => {
+  return dispatch => {
+    let dateStr = new Date();
+    let id = dateStr.getTime();
+    let date = dateStr.toDateString();
+    let cardIds = [];
+    let data = { [id]: Object.assign({}, listData, { id, date, cardIds }) };
+    dispatch({
+      type: "ADD_LIST",
+      data
+    });
+    dispatch({
+      type: "ADD_LIST_TO_BOARD",
+      data: { boardId, listId: id }
+    });
+  };
+};
+
+export const addListToBoard = (boardId, listId) => {
+  return {
+    type: "ADD_LIST_TO_BOARD",
+    data: { boardId, listId }
+  };
+};

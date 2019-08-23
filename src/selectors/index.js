@@ -6,6 +6,14 @@ export let getBoards = ({ boards }) => {
   return boardArray;
 };
 
+export let getLists = ({ lists }) => {
+  let listArray = [];
+  for (var key in lists) {
+    listArray.push(lists[key]);
+  }
+  return listArray;
+};
+
 export let getBoardName = (state, id) => {
   console.log(state);
   return state[id].title || "";

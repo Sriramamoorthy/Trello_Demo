@@ -1,3 +1,8 @@
 .bdDtlCont {
   min-width: 90%;
 }
+.addBtn {
+  display: inline-block;
+  width: 18rem;
+  margin: 20px;
+}
