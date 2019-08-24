@@ -4,12 +4,13 @@ import style from "./BoardDetailView.module.css";
 import AddList from "../../components/AddList/AddList";
 import ListContainer from "../ListContainer/ListContainer";
 import { getBoardName, getLists } from "../../selectors";
-import { addList } from "../../actions";
+import { addList, deleteList } from "../../actions";
 class BoardDetailView extends React.Component {
   constructor(props) {
     super(props);
     this.handleAddList = this.handleAddList.bind(this);
     this.getLists = this.getLists.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
 
   handleAddList(data) {
@@ -17,11 +18,23 @@ class BoardDetailView extends React.Component {
     addList(data, match.params.id);
   }
 
+  onDelete(listId) {
+    let { boardId, deleteList } = this.props;
+    deleteList({ boardId, listId });
+  }
+
   getLists() {
     let { lists, listIds } = this.props;
     let html = listIds.map((listId, index) => {
       let list = lists[listId];
-      return <ListContainer key={index} id={list.id} title={list.title} />;
+      return (
+        <ListContainer
+          key={index}
+          id={list.id}
+          title={list.title}
+          onDelete={this.onDelete}
+        />
+      );
     });
     return html;
   }
@@ -54,5 +67,5 @@ const mapStateToProps = (state, props) => {
 };
 export default connect(
   mapStateToProps,
-  { addList }
+  { addList, deleteList }
 )(BoardDetailView);

@@ -41,6 +41,13 @@ export const boards = (state = initialBoard, { type, data }) => {
       newState[data.boardId].listIds.push(data.listId);
       return newState;
     }
+    case "REMOVE_LIST_FROM_BOARD": {
+      let newState = Object.assign({}, state);
+      let listIds = newState[data.boardId].listIds;
+      var filteredIds = listIds.filter(value => value != data.listId);
+      newState[data.boardId].listIds = filteredIds;
+      return newState;
+    }
     case "DELETE_BOARD_SUCCESS": {
       let newState = Object.assign({}, state);
       delete newState[data];
@@ -67,7 +74,7 @@ export const lists = (state = initialCards, { type, data }) => {
       newState[data.listId].cardIds = filteredIds;
       return newState;
     }
-    case "DELETE_LIST_SUCCESS": {
+    case "DELETE_LIST": {
       let newState = Object.assign({}, state);
       delete newState[data];
       return newState;

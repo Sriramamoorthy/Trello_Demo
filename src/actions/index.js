@@ -64,3 +64,16 @@ export const moveCard = cardObj => {
     });
   };
 };
+
+export const deleteList = ({ boardId, listId }) => {
+  return dispatch => {
+    dispatch({
+      type: "REMOVE_LIST_FROM_BOARD",
+      data: { boardId, listId }
+    });
+    dispatch({
+      type: "DELETE_LIST",
+      data: listId
+    });
+  };
+};

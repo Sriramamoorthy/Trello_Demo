@@ -13,6 +13,7 @@ class ListContainer extends React.Component {
     super(props);
     this.onAddCard = this.onAddCard.bind(this);
     this.getCards = this.getCards.bind(this);
+    this.deleteList = this.deleteList.bind(this);
   }
 
   onAddCard(cardData) {
@@ -51,6 +52,11 @@ class ListContainer extends React.Component {
     return cardHtml;
   }
 
+  deleteList(listId) {
+    let { onDelete } = this.props;
+    onDelete && onDelete(listId);
+  }
+
   render() {
     let { title, id } = this.props;
     let cardHtml = this.getCards(id);
@@ -60,7 +66,10 @@ class ListContainer extends React.Component {
           <Card.Body style={{ padding: "0.55rem" }}>
             <Card.Title>
               {title}
-              <MdDelete className={style.listDlt} />
+              <MdDelete
+                className={style.listDlt}
+                onClick={this.deleteList.bind(this, id)}
+              />
             </Card.Title>
             {cardHtml}
           </Card.Body>
