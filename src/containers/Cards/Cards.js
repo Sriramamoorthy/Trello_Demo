@@ -1,21 +1,42 @@
 import React from "react";
+import { connect } from "react-redux";
 import style from "./Cards.module.css";
 import { Modal } from "react-bootstrap";
 import InputText from "../../components/InputText/InputText";
-import { MdEventNote, MdSpeakerNotes, MdModeEdit } from "react-icons/md";
-export default class Cards extends React.Component {
+import { deleteCard } from "../../actions";
+import {
+  MdEventNote,
+  MdSpeakerNotes,
+  MdModeEdit,
+  MdDelete
+} from "react-icons/md";
+class Cards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showModal: false
     };
     this.toggleModal = this.toggleModal.bind(this);
+    this.onDelete = this.onDelete.bind(this);
+    this.onEdit = this.onEdit.bind(this);
   }
 
   toggleModal() {
     this.setState({
       showModal: !this.state.showModal
     });
+  }
+
+  onDelete(e) {
+    e.stopPropagation();
+    let { cardId, listId, deleteCard } = this.props;
+    deleteCard({ cardId, listId });
+  }
+
+  onEdit(e) {
+    e.stopPropagation();
+    let { cardId, listId } = this.props;
+    console.log(cardId, listId);
   }
 
   render() {
@@ -25,7 +46,8 @@ export default class Cards extends React.Component {
       <React.Fragment>
         <div className={style.crdCont} onClick={this.toggleModal}>
           {cardName}
-          <MdModeEdit className={style.editIcn} />
+          <MdModeEdit className={style.editIcn} onClick={this.onEdit} />
+          <MdDelete className={style.editIcn} onClick={this.onDelete} />
         </div>
         {showModal ? (
           <Modal show={showModal} onHide={this.toggleModal}>
@@ -58,3 +80,12 @@ export default class Cards extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state, props) => {
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  { deleteCard }
+)(Cards);

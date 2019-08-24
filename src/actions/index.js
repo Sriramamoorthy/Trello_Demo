@@ -65,8 +65,22 @@ export const moveCard = cardObj => {
   };
 };
 
-export const deleteList = ({ boardId, listId }) => {
+export const deleteCard = ({ cardId, listId }) => {
   return dispatch => {
+    dispatch({
+      type: "REMOVE_CARD_FROM_LIST",
+      data: { cardId, listId }
+    });
+    dispatch({
+      type: "DELETE_CARD",
+      data: cardId
+    });
+  };
+};
+
+export const deleteList = ({ boardId, listId }) => {
+  return (dispatch, getState) => {
+    let { lists } = getState();
     dispatch({
       type: "REMOVE_LIST_FROM_BOARD",
       data: { boardId, listId }
@@ -74,6 +88,10 @@ export const deleteList = ({ boardId, listId }) => {
     dispatch({
       type: "DELETE_LIST",
       data: listId
+    });
+    dispatch({
+      type: "DELETE_CARDS_OF_LIST",
+      data: lists[listId].cardIds
     });
   };
 };

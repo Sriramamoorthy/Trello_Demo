@@ -42,6 +42,8 @@ class ListContainer extends React.Component {
       return (
         <Draggable key={index} type="cards" data={[card.id, listId]}>
           <Cards
+            listId={listId}
+            cardId={card.id}
             cardName={card.title}
             cardDesc={card.desc}
             createdTime={card.date}

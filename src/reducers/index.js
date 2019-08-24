@@ -74,6 +74,13 @@ export const lists = (state = initialCards, { type, data }) => {
       newState[data.listId].cardIds = filteredIds;
       return newState;
     }
+    case "DELETE_CARD_FROM_LIST": {
+      let newState = Object.assign({}, state);
+      let cardIds = newState[data.listId].cardIds;
+      var filteredIds = cardIds.filter(value => value != data.cardId);
+      newState[data.listId].cardIds = filteredIds;
+      return newState;
+    }
     case "DELETE_LIST": {
       let newState = Object.assign({}, state);
       delete newState[data];
@@ -89,7 +96,16 @@ export const cards = (state = {}, { type, data }) => {
     case "ADD_CARD":
       return Object.assign({}, state, data);
     case "DELETE_CARD":
-      return state;
+      let newState = Object.assign({}, state);
+      delete newState[data];
+      return newState;
+    case "DELETE_CARDS_OF_LIST": {
+      let newState = Object.assign({}, state);
+      data.map(id => {
+        delete newState[id];
+      });
+      return newState;
+    }
     default:
       return state;
   }
