@@ -1,3 +1,9 @@
 .addCdBtn {
   cursor: pointer;
 }
+.listDlt {
+  margin-top: -3px;
+  padding-left: 5px;
+  font-size: 24px;
+  cursor: pointer;
+}

@@ -1,6 +1,8 @@
 import React from "react";
 import style from "./Cards.module.css";
 import { Modal, Button } from "react-bootstrap";
+import InputText from "../../components/InputText/InputText";
+import { MdEventNote, MdSpeakerNotes } from "react-icons/md";
 export default class Cards extends React.Component {
   constructor(props) {
     super(props);
@@ -27,17 +29,28 @@ export default class Cards extends React.Component {
         {showModal ? (
           <Modal show={showModal} onHide={this.toggleModal}>
             <Modal.Header closeButton>
-              <Modal.Title>{cardName}</Modal.Title>
+              <Modal.Title>
+                <MdEventNote className={style.mr15} />
+                {cardName}
+              </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body
+              style={{
+                minHeight: "420px",
+                maxHeight: "500px",
+                overflowY: "auto"
+              }}
+            >
               <div>{cardDesc}</div>
-              <span>{createdTime}</span>
+              <span>Created at {createdTime}</span>
+              <div className={style.mt20}>
+                <h4 className={style.actHdr}>
+                  <MdSpeakerNotes className={style.mr15} />
+                  Comments
+                </h4>
+                <InputText placeHolder="Write your comments..." />
+              </div>
             </Modal.Body>
-            <Modal.Footer>
-              <Button variant="primary" onClick={this.toggleModal}>
-                Save Changes
-              </Button>
-            </Modal.Footer>
           </Modal>
         ) : null}
       </React.Fragment>

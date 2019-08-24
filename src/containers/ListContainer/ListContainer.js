@@ -2,11 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { Card } from "react-bootstrap";
 import AddCard from "../../components/AddCard/AddCard";
-import Cards from "../../components/Cards/Cards";
+import Cards from "../Cards/Cards";
 import style from "./ListContainer.module.css";
 import { addCard, moveCard } from "../../actions";
 import { getCards } from "../../selectors";
 import { Draggable, Droppable } from "react-drag-and-drop";
+import { MdDelete } from "react-icons/md";
 class ListContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -57,7 +58,10 @@ class ListContainer extends React.Component {
       <Card style={{ width: "18rem", margin: "20px", display: "inline-block" }}>
         <Droppable types={["cards"]} onDrop={this.onDrop.bind(this, id)}>
           <Card.Body style={{ padding: "0.55rem" }}>
-            <Card.Title>{title}</Card.Title>
+            <Card.Title>
+              {title}
+              <MdDelete className={style.listDlt} />
+            </Card.Title>
             {cardHtml}
           </Card.Body>
         </Droppable>
