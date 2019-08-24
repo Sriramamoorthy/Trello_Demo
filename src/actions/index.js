@@ -51,3 +51,16 @@ export const addCard = (cardData, listId) => {
     });
   };
 };
+
+export const moveCard = cardObj => {
+  return dispatch => {
+    dispatch({
+      type: "REMOVE_CARD_FROM_LIST",
+      data: { listId: cardObj.fromList, cardId: cardObj.cardId }
+    });
+    dispatch({
+      type: "ADD_CARD_TO_LIST",
+      data: { listId: cardObj.toList, cardId: cardObj.cardId }
+    });
+  };
+};

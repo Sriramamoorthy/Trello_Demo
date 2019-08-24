@@ -60,6 +60,13 @@ export const lists = (state = initialCards, { type, data }) => {
       newState[data.listId].cardIds.push(data.cardId);
       return newState;
     }
+    case "REMOVE_CARD_FROM_LIST": {
+      let newState = Object.assign({}, state);
+      let cardIds = newState[data.listId].cardIds;
+      var filteredIds = cardIds.filter(value => value != data.cardId);
+      newState[data.listId].cardIds = filteredIds;
+      return newState;
+    }
     case "DELETE_LIST_SUCCESS": {
       let newState = Object.assign({}, state);
       delete newState[data];

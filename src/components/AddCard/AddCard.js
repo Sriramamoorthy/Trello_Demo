@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import style from "./AddCard.module.css";
 import InputText from "../InputText/InputText";
+import { MdNoteAdd } from "react-icons/md";
 export default class AddCard extends React.Component {
   constructor(props) {
     super(props);
@@ -57,6 +58,7 @@ export default class AddCard extends React.Component {
             block
             onClick={this.toggleForm}
           >
+            <MdNoteAdd className={style.addIcon} />
             Add Card
           </Button>
         ) : (

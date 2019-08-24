@@ -4,8 +4,9 @@ import { Card } from "react-bootstrap";
 import AddCard from "../../components/AddCard/AddCard";
 import Cards from "../../components/Cards/Cards";
 import style from "./ListContainer.module.css";
-import { addCard } from "../../actions";
+import { addCard, moveCard } from "../../actions";
 import { getCards } from "../../selectors";
+import { Draggable, Droppable } from "react-drag-and-drop";
 class ListContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -18,31 +19,48 @@ class ListContainer extends React.Component {
     addCard(cardData, id);
   }
 
-  getCards() {
+  onDrop(id, data) {
+    let { moveCard } = this.props;
+    let dropObj = data.cards.split(",");
+    let obj = {
+      cardId: dropObj[0],
+      fromList: dropObj[1],
+      toList: id
+    };
+    moveCard && moveCard(obj);
+    this.setState({
+      moved: true
+    });
+  }
+
+  getCards(listId) {
     let { cards, cardIds } = this.props;
     let cardHtml = cardIds.map((cardId, index) => {
       let card = cards[cardId];
       return (
-        <Cards
-          key={index}
-          cardName={card.title}
-          cardDesc={card.desc}
-          createdTime={card.date}
-        />
+        <Draggable key={index} type="cards" data={[card.id, listId]}>
+          <Cards
+            cardName={card.title}
+            cardDesc={card.desc}
+            createdTime={card.date}
+          />
+        </Draggable>
       );
     });
     return cardHtml;
   }
 
   render() {
-    let { title } = this.props;
-    let cardHtml = this.getCards();
+    let { title, id } = this.props;
+    let cardHtml = this.getCards(id);
     return (
       <Card style={{ width: "18rem", margin: "20px", display: "inline-block" }}>
-        <Card.Body style={{ padding: "0.55rem" }}>
-          <Card.Title>{title}</Card.Title>
-          {cardHtml}
-        </Card.Body>
+        <Droppable types={["cards"]} onDrop={this.onDrop.bind(this, id)}>
+          <Card.Body style={{ padding: "0.55rem" }}>
+            <Card.Title>{title}</Card.Title>
+            {cardHtml}
+          </Card.Body>
+        </Droppable>
         <Card.Footer style={{ padding: "0" }}>
           <div className={style.addCdBtn}>
             <AddCard onAdd={this.onAddCard} />
@@ -62,5 +80,5 @@ let mapStateToProps = (state, props) => {
 };
 export default connect(
   mapStateToProps,
-  { addCard }
+  { addCard, moveCard }
 )(ListContainer);
