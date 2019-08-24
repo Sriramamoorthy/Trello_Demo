@@ -14,6 +14,15 @@ export default class AddList extends React.Component {
     this.onAdd = this.onAdd.bind(this);
   }
 
+  componentDidMount() {
+    window.addEventListener("keyup", e => {
+      let { showAddForm, listName } = this.state;
+      if (showAddForm && listName != "" && e.keyCode === 13) {
+        this.onAdd();
+      }
+    });
+  }
+
   toggleForm() {
     this.setState({
       showAddForm: !this.state.showAddForm,

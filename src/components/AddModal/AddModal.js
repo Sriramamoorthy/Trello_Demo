@@ -15,6 +15,15 @@ export default class AddModal extends React.Component {
     this.hideModal = this.hideModal.bind(this);
   }
 
+  componentDidMount() {
+    window.addEventListener("keyup", e => {
+      let { title } = this.state;
+      if (title != "" && e.keyCode === 13) {
+        this.onSubmit();
+      }
+    });
+  }
+
   onTypeTitle(str) {
     this.setState({
       title: str

@@ -9,7 +9,7 @@ class BoardDetailView extends React.Component {
   constructor(props) {
     super(props);
     this.handleAddList = this.handleAddList.bind(this);
-    this.getCards = this.getCards.bind(this);
+    this.getLists = this.getLists.bind(this);
   }
 
   handleAddList(data) {
@@ -17,7 +17,7 @@ class BoardDetailView extends React.Component {
     addList(data, match.params.id);
   }
 
-  getCards() {
+  getLists() {
     let { lists, listIds } = this.props;
     let html = listIds.map((listId, index) => {
       let list = lists[listId];
@@ -28,7 +28,7 @@ class BoardDetailView extends React.Component {
 
   render() {
     let { boardName } = this.props;
-    let listHtml = this.getCards();
+    let listHtml = this.getLists();
     return (
       <React.Fragment>
         <div>{boardName}</div>

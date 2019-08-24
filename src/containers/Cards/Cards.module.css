@@ -8,6 +8,10 @@
 .actHdr {
   margin: 10px 0 20px 0px;
 }
+.editIcn {
+  float: right;
+  margin: 4px 10px;
+}
 .mr15 {
   margin-right: 15px;
 }

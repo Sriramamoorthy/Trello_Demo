@@ -1,8 +1,8 @@
 import React from "react";
 import style from "./Cards.module.css";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import InputText from "../../components/InputText/InputText";
-import { MdEventNote, MdSpeakerNotes } from "react-icons/md";
+import { MdEventNote, MdSpeakerNotes, MdModeEdit } from "react-icons/md";
 export default class Cards extends React.Component {
   constructor(props) {
     super(props);
@@ -25,6 +25,7 @@ export default class Cards extends React.Component {
       <React.Fragment>
         <div className={style.crdCont} onClick={this.toggleModal}>
           {cardName}
+          <MdModeEdit className={style.editIcn} />
         </div>
         {showModal ? (
           <Modal show={showModal} onHide={this.toggleModal}>

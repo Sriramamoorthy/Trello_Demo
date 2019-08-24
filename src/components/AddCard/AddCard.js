@@ -25,6 +25,15 @@ export default class AddCard extends React.Component {
     });
   }
 
+  componentDidMount() {
+    window.addEventListener("keyup", e => {
+      let { showAddForm, cardName } = this.state;
+      if (showAddForm && cardName != "" && e.keyCode === 13) {
+        this.onAdd();
+      }
+    });
+  }
+
   onChangeName(str) {
     this.setState({
       cardName: str
