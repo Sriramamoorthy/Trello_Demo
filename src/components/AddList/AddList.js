@@ -61,7 +61,11 @@ export default class AddList extends React.Component {
               value={listName}
             />
             <div className={style.addLst}>
-              <Button variant="success" onClick={this.onAdd}>
+              <Button
+                variant="success"
+                onClick={this.onAdd}
+                disabled={listName == ""}
+              >
                 Add
               </Button>
             </div>

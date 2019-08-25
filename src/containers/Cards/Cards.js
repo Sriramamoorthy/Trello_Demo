@@ -30,10 +30,12 @@ class Cards extends React.Component {
   }
 
   toggleModal() {
-    this.setState({
-      showModal: !this.state.showModal,
-      comment: ""
-    });
+    if (!this.state.isEdit) {
+      this.setState({
+        showModal: !this.state.showModal,
+        comment: ""
+      });
+    }
   }
 
   onDelete(e) {

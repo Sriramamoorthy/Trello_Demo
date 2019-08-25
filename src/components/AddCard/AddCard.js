@@ -83,7 +83,11 @@ export default class AddCard extends React.Component {
               value={cardDesc}
             />
             <div className={style.addLst}>
-              <Button variant="success" onClick={this.onAdd}>
+              <Button
+                variant="success"
+                onClick={this.onAdd}
+                disabled={cardName == ""}
+              >
                 Add
               </Button>
             </div>
