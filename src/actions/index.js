@@ -40,7 +40,8 @@ export const addCard = (cardData, listId) => {
     let dateStr = new Date();
     let id = dateStr.getTime();
     let date = dateStr.toDateString();
-    let data = { [id]: Object.assign({}, cardData, { id, date }) };
+    let comments = [];
+    let data = { [id]: Object.assign({}, cardData, { id, date, comments }) };
     dispatch({
       type: "ADD_CARD",
       data
@@ -49,6 +50,17 @@ export const addCard = (cardData, listId) => {
       type: "ADD_CARD_TO_LIST",
       data: { listId, cardId: id }
     });
+  };
+};
+
+export const addComment = (cardId, comment) => {
+  let dateStr = new Date();
+  let id = dateStr.getTime();
+  let date = dateStr.toDateString();
+  let commentObj = { id, date, comment };
+  return {
+    type: "ADD_COMMENT",
+    data: { cardId, commentObj }
   };
 };
 
@@ -75,6 +87,13 @@ export const deleteCard = ({ cardId, listId }) => {
       type: "DELETE_CARD",
       data: cardId
     });
+  };
+};
+
+export const editCard = ({ cardId, editCardName }) => {
+  return {
+    type: "EDIT_CARD_NAME",
+    data: { cardId, cardName: editCardName }
   };
 };
 

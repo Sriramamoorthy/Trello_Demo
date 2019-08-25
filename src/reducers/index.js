@@ -106,6 +106,16 @@ export const cards = (state = {}, { type, data }) => {
       });
       return newState;
     }
+    case "ADD_COMMENT": {
+      let newState = Object.assign({}, state);
+      newState[data.cardId].comments.push(data.commentObj);
+      return newState;
+    }
+    case "EDIT_CARD_NAME": {
+      let newState = Object.assign({}, state);
+      newState[data.cardId].title = data.cardName;
+      return newState;
+    }
     default:
       return state;
   }
