@@ -38,14 +38,18 @@ export const boards = (state = initialBoard, { type, data }) => {
     }
     case "ADD_LIST_TO_BOARD": {
       let newState = Object.assign({}, state);
-      newState[data.boardId].listIds.push(data.listId);
+      newState[data.boardId] = Object.assign({}, newState[data.boardId], {
+        listIds: newState[data.boardId].listIds.concat([data.listId])
+      });
       return newState;
     }
     case "REMOVE_LIST_FROM_BOARD": {
       let newState = Object.assign({}, state);
       let listIds = newState[data.boardId].listIds;
       var filteredIds = listIds.filter(value => value != data.listId);
-      newState[data.boardId].listIds = filteredIds;
+      newState[data.boardId] = Object.assign({}, newState[data.boardId], {
+        listIds: filteredIds
+      });
       return newState;
     }
     case "DELETE_BOARD_SUCCESS": {
@@ -64,21 +68,19 @@ export const lists = (state = initialCards, { type, data }) => {
       return Object.assign({}, state, data);
     case "ADD_CARD_TO_LIST": {
       let newState = Object.assign({}, state);
-      newState[data.listId].cardIds.push(data.cardId);
+      newState[data.listId] = Object.assign({}, newState[data.listId], {
+        cardIds: newState[data.listId].cardIds.concat([data.cardId])
+      });
       return newState;
     }
-    case "REMOVE_CARD_FROM_LIST": {
-      let newState = Object.assign({}, state);
-      let cardIds = newState[data.listId].cardIds;
-      var filteredIds = cardIds.filter(value => value != data.cardId);
-      newState[data.listId].cardIds = filteredIds;
-      return newState;
-    }
+    case "REMOVE_CARD_FROM_LIST":
     case "DELETE_CARD_FROM_LIST": {
       let newState = Object.assign({}, state);
       let cardIds = newState[data.listId].cardIds;
       var filteredIds = cardIds.filter(value => value != data.cardId);
-      newState[data.listId].cardIds = filteredIds;
+      newState[data.listId] = Object.assign({}, newState[data.listId], {
+        cardIds: filteredIds
+      });
       return newState;
     }
     case "DELETE_LIST": {
@@ -113,7 +115,9 @@ export const cards = (state = {}, { type, data }) => {
     }
     case "EDIT_CARD_NAME": {
       let newState = Object.assign({}, state);
-      newState[data.cardId].title = data.cardName;
+      newState[data.cardId] = Object.assign({}, newState[data.cardId], {
+        title: data.cardName
+      });
       return newState;
     }
     default:

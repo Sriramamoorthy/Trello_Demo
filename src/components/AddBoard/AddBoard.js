@@ -1,8 +1,8 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import InputText from "../InputText/InputText";
-import style from "./AddModal.module.css";
-export default class AddModal extends React.Component {
+import style from "./AddBoard.module.css";
+export default class AddBoard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

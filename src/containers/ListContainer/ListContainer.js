@@ -30,9 +30,6 @@ class ListContainer extends React.Component {
       toList: id
     };
     moveCard && moveCard(obj);
-    this.setState({
-      moved: true
-    });
   }
 
   getCards(listId) {

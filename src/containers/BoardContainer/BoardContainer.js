@@ -4,7 +4,7 @@ import { Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { getBoards } from "../../selectors/index";
 import style from "./BoardContainer.module.css";
-import AddModal from "../../components/AddModal/AddModal";
+import AddBoard from "../../components/AddBoard/AddBoard";
 import { addBoard, deleteBoard } from "../../actions";
 class BoardContainer extends React.Component {
   constructor(props) {
@@ -74,7 +74,7 @@ class BoardContainer extends React.Component {
                 </Card.Body>
               </Card>
             </div>
-            <AddModal
+            <AddBoard
               isShow={showAddBoard}
               boardTitle="Add Board"
               hideModal={this.toggleAddModal}
