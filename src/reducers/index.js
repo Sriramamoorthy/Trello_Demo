@@ -12,8 +12,8 @@ export const demo = (state = "", action) => {
 let initialBoard = {
   123: {
     id: "123",
-    title: "The Rise of USA",
-    desc: "Involves the rise of United States",
+    title: "Default Board",
+    desc: "The board which contains two default lists",
     listIds: ["321", "124"]
   }
 };
