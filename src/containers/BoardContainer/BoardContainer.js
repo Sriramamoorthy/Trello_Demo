@@ -42,7 +42,7 @@ class BoardContainer extends React.Component {
     const boardHtml = boards.map((obj, index) => {
       return (
         <div className={style.boardTile} key={index}>
-          <Card style={{ width: "18rem", height: "10rem" }}>
+          <Card style={{ width: "18rem" }}>
             <Card.Body onClick={this.openBoardDetail.bind(this, obj.id)}>
               <Card.Title>{obj.title}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
