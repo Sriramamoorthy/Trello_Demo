@@ -10,7 +10,7 @@
 }
 .crdLstCnt {
   overflow: auto;
-  max-height: calc(100vh - 285px);
+  max-height: calc(100vh - 340px);
 }
 .lstHdr {
   width: 240px;
