@@ -2,9 +2,16 @@
   min-width: 90%;
   align-items: flex-start;
   display: flex;
+  overflow-x: auto;
+  height: calc(100vh - 100px);
 }
 .addBtn {
   display: inline-block;
   width: 18rem;
   margin: 20px;
+}
+.brdHdr {
+  font-weight: bold;
+  font-size: 18px;
+  margin-left: 20px;
 }

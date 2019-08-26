@@ -4,6 +4,7 @@ import style from "./Cards.module.css";
 import { Modal, Button } from "react-bootstrap";
 import InputText from "../../components/InputText/InputText";
 import { deleteCard, addComment, editCard } from "../../actions";
+import PropTypes from "prop-types";
 import {
   MdEventNote,
   MdSpeakerNotes,
@@ -36,6 +37,15 @@ class Cards extends React.Component {
         comment: ""
       });
     }
+  }
+
+  componentDidMount() {
+    window.addEventListener("keyup", e => {
+      let { showModal, comment } = this.state;
+      if (showModal && comment != "" && e.keyCode === 13) {
+        this.onAddComment();
+      }
+    });
   }
 
   onDelete(e) {
@@ -126,9 +136,11 @@ class Cards extends React.Component {
             </div>
           ) : (
             <div>
-              {cardName}
-              <MdModeEdit className={style.editIcn} onClick={this.onEdit} />
-              <MdDelete className={style.editIcn} onClick={this.onDelete} />
+              <div className={style.cardTitle}>{cardName}</div>
+              <span>
+                <MdDelete className={style.editIcn} onClick={this.onDelete} />
+                <MdModeEdit className={style.editIcn} onClick={this.onEdit} />
+              </span>
             </div>
           )}
         </div>
@@ -179,6 +191,16 @@ class Cards extends React.Component {
   }
 }
 
+Cards.propTypes = {
+  cardId: PropTypes.string,
+  comments: PropTypes.array,
+  cardName: PropTypes.string,
+  cardDesc: PropTypes.string,
+  createdTime: PropTypes.string,
+  deleteCard: PropTypes.func,
+  addComment: PropTypes.func,
+  editCard: PropTypes.func
+};
 const mapStateToProps = (state, props) => {
   let cardId = props.cardId;
   return {

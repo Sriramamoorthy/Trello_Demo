@@ -8,6 +8,7 @@ import { addCard, moveCard } from "../../actions";
 import { getCards } from "../../selectors";
 import { Draggable, Droppable } from "react-drag-and-drop";
 import { MdDelete } from "react-icons/md";
+import PropTypes from "prop-types";
 class ListContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -60,17 +61,24 @@ class ListContainer extends React.Component {
     let { title, id } = this.props;
     let cardHtml = this.getCards(id);
     return (
-      <Card style={{ width: "18rem", margin: "20px", display: "inline-block" }}>
+      <Card
+        style={{
+          width: "18rem",
+          margin: "20px",
+          display: "inline-block",
+          minWidth: "18rem"
+        }}
+      >
         <Droppable types={["cards"]} onDrop={this.onDrop.bind(this, id)}>
           <Card.Body style={{ padding: "0.55rem" }}>
             <Card.Title>
-              {title}
+              <div className={style.lstHdr}>{title}</div>
               <MdDelete
                 className={style.listDlt}
                 onClick={this.deleteList.bind(this, id)}
               />
             </Card.Title>
-            {cardHtml}
+            <div className={style.crdLstCnt}>{cardHtml}</div>
           </Card.Body>
         </Droppable>
         <Card.Footer style={{ padding: "0" }}>
@@ -82,6 +90,16 @@ class ListContainer extends React.Component {
     );
   }
 }
+
+ListContainer.propTypes = {
+  listId: PropTypes.string,
+  cards: PropTypes.array,
+  cardIds: PropTypes.array,
+  addCard: PropTypes.func,
+  moveCard: PropTypes.func,
+  title: PropTypes.string,
+  id: PropTypes.string
+};
 
 let mapStateToProps = (state, props) => {
   let listId = props.id;

@@ -11,5 +11,5 @@ export let getLists = ({ lists }) => lists;
 export let getCards = ({ cards }) => cards;
 
 export let getBoardName = (state, id) => {
-  return state[id].title || "";
+  return (state[id] && state[id].title) || "";
 };

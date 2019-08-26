@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import style from "./AddList.module.css";
 import InputText from "../InputText/InputText";
+import PropTypes from "prop-types";
 export default class AddList extends React.Component {
   constructor(props) {
     super(props);
@@ -80,3 +81,7 @@ export default class AddList extends React.Component {
     );
   }
 }
+
+AddList.propTypes = {
+  onAdd: PropTypes.func
+};

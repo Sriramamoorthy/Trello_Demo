@@ -2,6 +2,7 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import InputText from "../InputText/InputText";
 import style from "./AddBoard.module.css";
+import PropTypes from "prop-types";
 export default class AddBoard extends React.Component {
   constructor(props) {
     super(props);
@@ -100,3 +101,9 @@ export default class AddBoard extends React.Component {
     );
   }
 }
+
+AddBoard.propTypes = {
+  onSubmit: PropTypes.func,
+  isShow: PropTypes.bool,
+  boardTitle: PropTypes.string
+};

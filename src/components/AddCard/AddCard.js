@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import style from "./AddCard.module.css";
 import InputText from "../InputText/InputText";
 import { MdNoteAdd } from "react-icons/md";
+import PropTypes from "prop-types";
 export default class AddCard extends React.Component {
   constructor(props) {
     super(props);
@@ -63,7 +64,7 @@ export default class AddCard extends React.Component {
         {!showAddForm ? (
           <Button
             variant="secondary"
-            style={{ background: "#efefef", border: "#efefef", color: "#aaa" }}
+            style={{ background: "#efefef", border: "#efefef", color: "#333" }}
             block
             onClick={this.toggleForm}
           >
@@ -102,3 +103,7 @@ export default class AddCard extends React.Component {
     );
   }
 }
+
+AddCard.propTypes = {
+  onAdd: PropTypes.func
+};

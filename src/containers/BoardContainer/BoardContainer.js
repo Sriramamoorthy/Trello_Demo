@@ -6,6 +6,7 @@ import { getBoards } from "../../selectors/index";
 import style from "./BoardContainer.module.css";
 import AddBoard from "../../components/AddBoard/AddBoard";
 import { addBoard, deleteBoard } from "../../actions";
+import PropTypes from "prop-types";
 class BoardContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -86,6 +87,13 @@ class BoardContainer extends React.Component {
     );
   }
 }
+
+BoardContainer.propTypes = {
+  boards: PropTypes.array,
+  addBoard: PropTypes.func,
+  deleteBoard: PropTypes.func,
+  history: PropTypes.object
+};
 
 const mapStateToProps = state => {
   return {

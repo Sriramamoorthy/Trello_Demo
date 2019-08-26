@@ -6,4 +6,13 @@
   padding-left: 5px;
   font-size: 24px;
   cursor: pointer;
+  vertical-align: top;
+}
+.crdLstCnt {
+  overflow: auto;
+  max-height: calc(100vh - 285px);
+}
+.lstHdr {
+  width: 240px;
+  display: inline-block;
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./InputText.module.css";
+import PropTypes from "prop-types";
 export default class InputText extends React.Component {
   constructor(props) {
     super(props);
@@ -22,3 +23,9 @@ export default class InputText extends React.Component {
     );
   }
 }
+
+InputText.propTypes = {
+  value: PropTypes.string,
+  placeHolder: PropTypes.string,
+  onKeyup: PropTypes.func
+};

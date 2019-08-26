@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import BoardContainer from "../BoardContainer/BoardContainer";
 import BoardDetailView from "../BoardDetailView/BoardDetailView";
 import style from "./AppContainer.module.css";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,13 +12,6 @@ import {
   Redirect
 } from "react-router-dom";
 export default class AppContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      page: ""
-    };
-  }
-
   render() {
     return (
       <Router>
